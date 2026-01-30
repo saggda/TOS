@@ -1,0 +1,40 @@
+<svg width="128" height="128" viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style="stop-color:#7A0F1C;stop-opacity:1" />
+          <stop offset="100%" style="stop-color:#9333EA;stop-opacity:1" />
+        </linearGradient>
+        <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+          <feGaussianBlur stdDeviation="1.28" result="coloredBlur"/>
+          <feMerge>
+            <feMergeNode in="coloredBlur"/>
+            <feMergeNode in="SourceGraphic"/>
+          </feMerge>
+        </filter>
+      </defs>
+
+      <!-- Background -->
+      <rect width="128" height="128" fill="url(#gradient)" rx="25"/>
+
+      <!-- Glassmorphism Effect -->
+      <rect
+        x="12"
+        y="12"
+        width="104"
+        height="104"
+        fill="rgba(255, 255, 255, 0.1)"
+        rx="20"
+      />
+
+      <!-- Text -->
+      <text
+        x="50%"
+        y="76.8"
+        font-family="Arial, sans-serif"
+        font-size="64"
+        font-weight="bold"
+        text-anchor="middle"
+        fill="white"
+        filter="url(#glow)"
+      >P</text>
+    </svg>

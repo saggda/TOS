@@ -1,0 +1,86 @@
+[
+  {
+    "id": "1",
+    "slug": "signature-hoodie-black",
+    "name": "Signature Hoodie",
+    "category": "hoodies",
+    "price": 4900,
+    "images": [
+      "/images/products/product-1.svg"
+    ],
+    "colors": ["black", "milk"],
+    "sizes": ["S", "M", "L", "XL"],
+    "description": "Premium quality hoodie with our signature logo. Heavy cotton blend, oversized fit.",
+    "featured": true
+  },
+  {
+    "id": "2",
+    "slug": "night-tee-white",
+    "name": "Night Tee",
+    "category": "tshirts",
+    "price": 2400,
+    "images": [
+      "/images/products/product-2.svg"
+    ],
+    "colors": ["white", "black"],
+    "sizes": ["S", "M", "L", "XL"],
+    "description": "Lightweight t-shirt with neon graphics. Perfect for summer nights.",
+    "featured": true
+  },
+  {
+    "id": "3",
+    "slug": "capsule-cap",
+    "name": "Capsule Cap",
+    "category": "caps",
+    "price": 1900,
+    "images": [
+      "/images/products/product-3.svg"
+    ],
+    "colors": ["black", "red"],
+    "sizes": ["One Size"],
+    "description": "Dad-style cap with embroidered logo. Limited edition drop.",
+    "featured": true
+  },
+  {
+    "id": "4",
+    "slug": "tech-cargo-pants",
+    "name": "Tech Cargo Pants",
+    "category": "accessories",
+    "price": 5900,
+    "images": [
+      "/images/products/product-4.svg"
+    ],
+    "colors": ["black"],
+    "sizes": ["S", "M", "L", "XL"],
+    "description": "Technical cargo pants with multiple pockets. Water-resistant fabric.",
+    "featured": false
+  },
+  {
+    "id": "5",
+    "slug": "logo-socks-pack",
+    "name": "Logo Socks Pack",
+    "category": "accessories",
+    "price": 900,
+    "images": [
+      "/images/products/product-5.svg"
+    ],
+    "colors": ["black", "white", "red"],
+    "sizes": ["One Size"],
+    "description": "Pack of 3 socks with branded detailing. Combed cotton.",
+    "featured": false
+  },
+  {
+    "id": "6",
+    "slug": "crewneck-red",
+    "name": "Crewneck Red",
+    "category": "hoodies",
+    "price": 4500,
+    "images": [
+      "/images/products/product-6.svg"
+    ],
+    "colors": ["red", "black"],
+    "sizes": ["S", "M", "L", "XL"],
+    "description": "Classic crewneck sweatshirt in our signature red color.",
+    "featured": false
+  }
+]

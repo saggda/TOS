@@ -1,0 +1,68 @@
+[
+  {
+    "id": "1",
+    "name": "Алексей",
+    "role": "Посетитель событий",
+    "avatar": "/images/avatars/avatar-1.svg",
+    "rating": 5,
+    "text": "Лучшие вечеринки в Москве! Организация на высшем уровне. Neon Nights 2025 был просто космос, буду на всех следующих!",
+    "event": "Neon Nights 2025",
+    "date": "2025-01-15",
+    "featured": true
+  },
+  {
+    "id": "2",
+    "name": "Мария",
+    "role": "Постоянный гость",
+    "avatar": "/images/avatars/avatar-2.svg",
+    "rating": 5,
+    "text": "Невероятная атмосфера, музыка и люди! Команда PROMO Team знает, как создавать магию. Уже купила билет на следующий ивент.",
+    "event": "Electronic Dreams",
+    "date": "2025-01-10",
+    "featured": true
+  },
+  {
+    "id": "3",
+    "name": "Дмитрий",
+    "role": "Меломан",
+    "avatar": "/images/avatars/avatar-3.svg",
+    "rating": 5,
+    "text": "Мерч топовый, качество просто огонь! Носил худку на фестиваль, куча людей спрашивали где взял. Респект бренду!",
+    "event": "Summer Festival",
+    "date": "2024-12-20",
+    "featured": true
+  },
+  {
+    "id": "4",
+    "name": "Елена",
+    "role": "Фотограф",
+    "avatar": "/images/avatars/avatar-4.svg",
+    "rating": 5,
+    "text": "Команда молодцы, всё супер! Работала с ними на нескольких мероприятиях - профессионализм на высоте. Рекомендую!",
+    "event": "Techno Tuesday",
+    "date": "2024-12-05",
+    "featured": true
+  },
+  {
+    "id": "5",
+    "name": "Максим",
+    "role": "DJ",
+    "avatar": "/images/avatars/avatar-5.svg",
+    "rating": 5,
+    "text": "Играл на их мероприятии - звук, свет, организация всё идеально. Лучший промоутер в городе, без преувеличения!",
+    "event": "Underground Sessions",
+    "date": "2024-11-28",
+    "featured": false
+  },
+  {
+    "id": "6",
+    "name": "Ольга",
+    "role": "Посетитель",
+    "avatar": "/images/avatars/avatar-6.svg",
+    "rating": 5,
+    "text": "Это было моё первое такое событие и я в восторге!_energy-zero Сначала стеснялась, но атмосфера располагает, танцевала до утра!",
+    "event": "Neon Nights 2025",
+    "date": "2025-01-15",
+    "featured": false
+  }
+]

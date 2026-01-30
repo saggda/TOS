@@ -1,0 +1,81 @@
+export default function GlobalError({
+  error,
+}: {
+  error: Error & { digest?: string }
+}) {
+  return (
+    <html>
+      <body>
+        <div style={{
+          minHeight: '100vh',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          background: 'linear-gradient(135deg, #FAF7F4 0%, #FFFFFF 50%, #F7F4F1 100%)',
+          padding: '20px'
+        }}>
+          <div style={{
+            maxWidth: '600px',
+            width: '100%',
+            background: 'rgba(255, 255, 255, 0.7)',
+            backdropFilter: 'blur(20px)',
+            border: '1px solid rgba(255, 255, 255, 0.4)',
+            borderRadius: '24px',
+            padding: '48px',
+            textAlign: 'center',
+            boxShadow: '0 8px 32px rgba(122, 15, 28, 0.08)'
+          }}>
+            <div style={{ fontSize: '64px', marginBottom: '24px' }}>🛠️</div>
+            <h1 style={{
+              fontSize: '72px',
+              fontWeight: 'bold',
+              background: 'linear-gradient(135deg, #7A0F1C 0%, #6B0D17 100%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              marginBottom: '24px'
+            }}>
+              500
+            </h1>
+            <h2 style={{
+              fontSize: '28px',
+              fontWeight: 'bold',
+              marginBottom: '16px'
+            }}>
+              Критическая ошибка
+            </h2>
+            <p style={{
+              fontSize: '18px',
+              color: '#666',
+              marginBottom: '32px',
+              lineHeight: '1.6'
+            }}>
+              Произошла серьезная ошибка. Наша команда уже работает над решением проблемы.
+            </p>
+            <a
+              href="/"
+              style={{
+                display: 'inline-block',
+                background: '#7A0F1C',
+                color: 'white',
+                padding: '14px 32px',
+                borderRadius: '50px',
+                fontWeight: '500',
+                textDecoration: 'none',
+                transition: 'all 0.3s ease'
+              }}
+              className="hover-button"
+            >
+              На главную
+            </a>
+            <style>{`
+              .hover-button:hover {
+                background: #6B0D17 !important;
+                transform: translateY(-2px);
+              }
+            `}</style>
+          </div>
+        </div>
+      </body>
+    </html>
+  )
+}

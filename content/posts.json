@@ -1,0 +1,57 @@
+[
+  {
+    "id": "1",
+    "slug": "afterparty-photo-report",
+    "title": "Neon Nights: Afterparty Photo Report",
+    "date": "2026-01-15",
+    "type": "photo",
+    "cover": "/images/posts/post-1.svg",
+    "excerpt": "Exclusive photos from our last event at Warehouse Club. The energy was incredible.",
+    "content": "Full photo gallery from the Neon Nights event. Over 500 attendees, three rooms of music, and unforgettable vibes until morning.",
+    "featured": true
+  },
+  {
+    "id": "2",
+    "slug": "new-season-announcement",
+    "title": "Spring 2026 Season Announcement",
+    "date": "2026-01-10",
+    "type": "news",
+    "cover": "/images/posts/post-2.svg",
+    "excerpt": "We're back with a new season of events. Check out what we've prepared for you.",
+    "content": "Spring season brings new venues, new artists, and new experiences. We've been working hard to create something special for you.",
+    "featured": true
+  },
+  {
+    "id": "3",
+    "slug": "behind-scenes-warehouse",
+    "title": "Behind the Scenes: Event Production",
+    "date": "2026-01-05",
+    "type": "case",
+    "cover": "/images/posts/post-3.svg",
+    "excerpt": "How we organize our events. A look behind the curtain.",
+    "content": "From concept to execution. See how our team transforms empty spaces into immersive experiences.",
+    "featured": false
+  },
+  {
+    "id": "4",
+    "slug": "artist-interview-dj-shadow",
+    "title": "Artist Interview: DJ Shadow",
+    "date": "2025-12-20",
+    "type": "video",
+    "cover": "/images/posts/post-4.svg",
+    "excerpt": "Exclusive interview with our headliner about music, creativity, and the scene.",
+    "content": "DJ Shadow shares his journey, inspirations, and thoughts on the electronic music scene in Russia.",
+    "featured": false
+  },
+  {
+    "id": "5",
+    "slug": "merch-drop-2026",
+    "title": "New Merch Drop 2026",
+    "date": "2025-12-15",
+    "type": "news",
+    "cover": "/images/posts/post-5.svg",
+    "excerpt": "Our new collection is here. Limited pieces available.",
+    "content": "The new merch collection features hoodies, tees, caps and accessories. All designed in-house with premium materials.",
+    "featured": false
+  }
+]

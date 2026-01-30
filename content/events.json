@@ -1,0 +1,62 @@
+[
+  {
+    "id": "1",
+    "slug": "neon-nights-moscow",
+    "title": "Neon Nights Moscow",
+    "date": "2026-02-15",
+    "city": "Moscow",
+    "venue": "Warehouse Club",
+    "poster": "/images/events/event-1.svg",
+    "description": "Night session with deep sound and visuals. Join us for an unforgettable night of electronic music featuring top local and international DJs.",
+    "ticketUrl": "https://kassir.ru",
+    "featured": true
+  },
+  {
+    "id": "2",
+    "slug": "midnight-session-spb",
+    "title": "Midnight Session",
+    "date": "2026-02-22",
+    "city": "Saint Petersburg",
+    "venue": "Port Club",
+    "poster": "/images/events/event-2.svg",
+    "description": "Deep house and techno until dawn. Exclusive venue, limited capacity.",
+    "ticketUrl": "https://kassir.ru",
+    "featured": true
+  },
+  {
+    "id": "3",
+    "slug": "liquid-warsaw",
+    "title": "Liquid Dreams",
+    "date": "2026-03-01",
+    "city": "Warsaw",
+    "venue": "Smolna",
+    "poster": "/images/events/event-3.svg",
+    "description": "Poland's most stylish night out. Progressive beats and liquid vibes.",
+    "ticketUrl": "https://kassir.ru",
+    "featured": true
+  },
+  {
+    "id": "4",
+    "slug": "underground-kazan",
+    "title": "Underground Series",
+    "date": "2026-03-08",
+    "city": "Kazan",
+    "venue": "Hall 61",
+    "poster": "/images/events/event-4.svg",
+    "description": "Raw techno energy in an industrial space. For true underground lovers.",
+    "ticketUrl": "https://kassir.ru",
+    "featured": false
+  },
+  {
+    "id": "5",
+    "slug": "sunset-beach-sochi",
+    "title": "Sunset Beach Party",
+    "date": "2026-03-15",
+    "city": "Sochi",
+    "venue": "Riviera Beach Club",
+    "poster": "/images/events/event-5.svg",
+    "description": "Beach vibes meets electronic beats. Sunset session by the Black Sea.",
+    "ticketUrl": "https://kassir.ru",
+    "featured": false
+  }
+]
