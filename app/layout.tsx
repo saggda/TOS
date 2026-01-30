@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Space_Grotesk, Manrope } from 'next/font/google'
+import { Space_Grotesk, Russo_One, Manrope } from 'next/font/google'
 import './globals.css'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
@@ -16,6 +16,13 @@ import { siteConfig } from '@/lib/metadata'
 const spaceGrotesk = Space_Grotesk({
   subsets: ['latin'],
   variable: '--font-space',
+  display: 'swap',
+})
+
+const russoOne = Russo_One({
+  weight: '400',
+  subsets: ['latin', 'cyrillic'],
+  variable: '--font-russo',
   display: 'swap',
 })
 
@@ -105,7 +112,7 @@ export default function RootLayout({
         <link rel="manifest" href="/manifest.json" />
         <meta name="theme-color" content="#7A0F1C" />
       </head>
-      <body className={`${spaceGrotesk.variable} ${manrope.variable}`}>
+      <body className={`${spaceGrotesk.variable} ${russoOne.variable} ${manrope.variable}`}>
         <SmoothScroll options={{ lerp: 0.15, duration: 1.5 }}>
           <ToastProvider>
             <CustomCursor />

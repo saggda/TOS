@@ -5,19 +5,12 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { Post } from '@/lib/types'
 import { formatDate } from '@/lib/utils'
-import { useTilt } from '@/hooks/useTilt'
 
 interface PostCardProps {
   post: Post
 }
 
 export function PostCard({ post }: PostCardProps) {
-  const { ref, style, isHovered } = useTilt({
-    max: 8,
-    scale: 1.025,
-    speed: 450
-  })
-
   const trackClick = () => {
     console.log('post_click', { slug: post.slug })
   }
@@ -42,18 +35,14 @@ export function PostCard({ post }: PostCardProps) {
       onClick={trackClick}
       className="block group touch-manipulation"
     >
-      <div
-        ref={ref}
-        style={style}
-        className="glass-card h-full overflow-hidden relative"
-      >
+      <div className="glass-card h-full overflow-hidden relative">
         {/* Image */}
         <div className="aspect-[16/10] relative overflow-hidden">
           <Image
             src={post.cover}
             alt={post.title}
             fill
-            className={`object-cover transition-transform duration-700 ${isHovered ? 'scale-110' : 'scale-100'}`}
+            className="object-cover transition-transform duration-700 group-hover:scale-110"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
 
@@ -75,18 +64,18 @@ export function PostCard({ post }: PostCardProps) {
             {formatDate(post.date)}
           </div>
 
-          <h3 className="font-display font-bold text-lg sm:text-xl mb-2 sm:mb-3 group-hover:text-brand-red group-active:text-brand-red transition-colors duration-300 line-clamp-2">
+          <h3 className="font-display font-bold text-lg sm:text-xl mb-2 sm:mb-3 text-white line-clamp-2">
             {post.title}
           </h3>
 
-          <p className="text-gray-600 text-xs sm:text-sm line-clamp-2 leading-relaxed">
+          <p className="text-gray-400 text-xs sm:text-sm line-clamp-2 leading-relaxed">
             {post.excerpt}
           </p>
 
-          {/* Hover/Touch indicator */}
-          <div className="flex items-center gap-2 text-brand-red text-xs sm:text-sm font-medium mt-3 sm:mt-4 opacity-0 group-hover:opacity-100 group-active:opacity-100 transition-opacity duration-300 transform translate-z-10">
+          {/* Hover/Touch indicator - no animation */}
+          <div className="flex items-center gap-2 text-brand-red text-xs sm:text-sm font-medium mt-3 sm:mt-4">
             <span>Читать</span>
-            <svg className={`w-3.5 h-3.5 sm:w-4 sm:h-4 transition-transform duration-300 ${isHovered ? 'translate-x-1' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
             </svg>
           </div>

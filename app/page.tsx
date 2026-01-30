@@ -11,8 +11,6 @@ import { ParticleSystem } from '@/components/ui/ParticleSystem'
 import { VideoBackground } from '@/components/ui/VideoBackground'
 import { TextReveal } from '@/components/ui/TextReveal'
 import { ParallaxSection } from '@/components/ui/ParallaxSection'
-import { CRTMonitor } from '@/components/ui/CRTMonitor'
-import { CRTMonitorContent } from '@/components/ui/CRTMonitorContent'
 import { generatePageMetadata } from '@/lib/metadata'
 
 export const metadata = generatePageMetadata({
@@ -31,79 +29,54 @@ export default async function HomePage() {
     <>
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden px-4 sm:px-6">
-        {/* Video Background (optional - add video file to public/videos/ when ready) */}
-        <VideoBackground src="" fallback="gradient" overlay="gradient" />
-
-        {/* Particle System */}
-        <ParticleSystem particleCount={50} interactive={true} />
-
-        {/* Animated Background Blobs with Parallax */}
-        <ParallaxSection speed={0.3} offset={0} className="absolute inset-0 overflow-hidden pointer-events-none">
+        {/* Animated Background Blobs */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <div className="absolute top-1/4 -left-20 w-64 h-64 sm:w-96 sm:h-96 bg-brand-red/20 rounded-full blur-3xl float" />
-          <ParallaxSection speed={0.5} offset={50}>
-            <div className="absolute bottom-1/4 -right-20 w-64 h-64 sm:w-96 sm:h-96 bg-accent-purple/20 rounded-full blur-3xl float" style={{ animationDelay: '2s' }} />
-          </ParallaxSection>
-          <ParallaxSection speed={0.2} offset={-30}>
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] sm:w-[600px] sm:h-[600px] bg-gradient-to-r from-brand-red/10 to-accent-pink/10 rounded-full blur-3xl" />
-          </ParallaxSection>
-        </ParallaxSection>
+          <div className="absolute bottom-1/4 -right-20 w-64 h-64 sm:w-96 sm:h-96 bg-accent-purple/20 rounded-full blur-3xl float" style={{ animationDelay: '2s' }} />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] sm:w-[600px] sm:h-[600px] bg-gradient-to-r from-brand-red/10 to-accent-pink/10 rounded-full blur-3xl" />
+        </div>
 
         <Container className="relative z-10">
-          <div className="max-w-7xl mx-auto">
-            {/* Grid Layout - Content + CRT Monitor */}
-            <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-              {/* Left Column - Main Content */}
-              <div className="text-center lg:text-left order-2 lg:order-1">
-                {/* Badge */}
-                <div className="inline-flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full bg-white/40 backdrop-blur-xl border border-white/50 mb-6 sm:mb-8 animate-fade-in">
-                  <span className="w-2 h-2 rounded-full bg-brand-red animate-pulse" />
-                  <span className="text-xs sm:text-sm font-medium text-gray-700">Event Promo Team</span>
-                </div>
+          <div className="max-w-5xl mx-auto text-center">
+            {/* Badge */}
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full bg-white/10 backdrop-blur-xl border border-white/20 mb-6 sm:mb-8 animate-fade-in">
+              <span className="w-2 h-2 rounded-full bg-brand-red animate-pulse" />
+              <span className="text-xs sm:text-sm font-medium text-gray-200">Event Promo Team</span>
+            </div>
 
-                {/* Main Heading */}
-                <h1 className="font-display text-4xl sm:text-5xl md:text-heading lg:text-display font-bold mb-4 sm:mb-6 text-balance">
-                  <TextReveal variant="fade-up" stagger={0.03}>
-                    Creating <span className="text-gradient">unforgettable</span> experiences
-                  </TextReveal>
-                </h1>
+            {/* Main Heading */}
+            <h1 className="font-y2k text-4xl sm:text-5xl md:text-heading lg:text-display font-bold mb-4 sm:mb-6 text-balance text-white">
+              Creating <span className="text-gradient">unforgettable</span> experiences
+            </h1>
 
-                {/* Subheading */}
-                <p className="font-sans text-base sm:text-lg md:text-xl lg:text-2xl text-gray-600 mb-8 sm:mb-12 max-w-2xl mx-auto lg:mx-0 leading-relaxed animate-slide-up" style={{ animationDelay: '0.1s' }}>
-                  Event promo team bringing you the best in electronic music, culture, and lifestyle.
-                </p>
+            {/* Subheading */}
+            <p className="font-sans text-base sm:text-lg md:text-xl lg:text-2xl text-gray-300 mb-8 sm:mb-12 max-w-2xl mx-auto leading-relaxed animate-slide-up" style={{ animationDelay: '0.1s' }}>
+              Event promo team bringing you the best in electronic music, culture, and lifestyle.
+            </p>
 
-                {/* CTA Buttons */}
-                <div className="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4 justify-center lg:justify-start animate-slide-up w-full sm:w-auto" style={{ animationDelay: '0.2s' }}>
-                  <Button size="lg" className="btn-primary pulse-glow w-full sm:w-auto" href="/afisha">
-                    Афиша
-                  </Button>
-                  <Button size="lg" className="btn-secondary w-full sm:w-auto" href="/shop">
-                    Магазин
-                  </Button>
-                </div>
+            {/* CTA Buttons */}
+            <div className="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4 justify-center animate-slide-up w-full sm:w-auto" style={{ animationDelay: '0.2s' }}>
+              <Button size="lg" className="btn-primary pulse-glow w-full sm:w-auto" href="/afisha">
+                Афиша
+              </Button>
+              <Button size="lg" className="btn-secondary w-full sm:w-auto" href="/shop">
+                Магазин
+              </Button>
+            </div>
 
-                {/* Stats */}
-                <div className="grid grid-cols-3 gap-4 sm:gap-6 md:gap-8 max-w-lg mx-auto lg:mx-0 mt-12 sm:mt-16 md:mt-20 animate-fade-in" style={{ animationDelay: '0.4s' }}>
-                  <div className="text-center">
-                    <div className="font-display text-2xl sm:text-3xl md:text-4xl font-bold text-gradient">50+</div>
-                    <div className="text-xs sm:text-sm text-gray-500 mt-1">Events</div>
-                  </div>
-                  <div className="text-center">
-                    <div className="font-display text-2xl sm:text-3xl md:text-4xl font-bold text-gradient">10K+</div>
-                    <div className="text-xs sm:text-sm text-gray-500 mt-1">People</div>
-                  </div>
-                  <div className="text-center">
-                    <div className="font-display text-2xl sm:text-3xl md:text-4xl font-bold text-gradient">2024</div>
-                    <div className="text-xs sm:text-sm text-gray-500 mt-1">Started</div>
-                  </div>
-                </div>
+            {/* Stats */}
+            <div className="grid grid-cols-3 gap-4 sm:gap-6 md:gap-8 max-w-lg mx-auto mt-12 sm:mt-16 md:mt-20 animate-fade-in" style={{ animationDelay: '0.4s' }}>
+              <div className="text-center">
+                <div className="font-display text-2xl sm:text-3xl md:text-4xl font-bold text-gradient">50+</div>
+                <div className="text-xs sm:text-sm text-gray-500 mt-1">Events</div>
               </div>
-
-              {/* Right Column - CRT Monitor */}
-              <div className="order-1 lg:order-2 flex justify-center lg:justify-end">
-                <CRTMonitor intensity="medium" interactive={true}>
-                  <CRTMonitorContent />
-                </CRTMonitor>
+              <div className="text-center">
+                <div className="font-display text-2xl sm:text-3xl md:text-4xl font-bold text-gradient">10K+</div>
+                <div className="text-xs sm:text-sm text-gray-500 mt-1">People</div>
+              </div>
+              <div className="text-center">
+                <div className="font-display text-2xl sm:text-3xl md:text-4xl font-bold text-gradient">2024</div>
+                <div className="text-xs sm:text-sm text-gray-500 mt-1">Started</div>
               </div>
             </div>
           </div>

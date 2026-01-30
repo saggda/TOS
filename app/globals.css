@@ -5,6 +5,7 @@
 @layer base {
   :root {
     --font-space: 'Space Grotesk', 'Manrope', system-ui, sans-serif;
+    --font-russo: 'Russo One', system-ui, sans-serif;
     --font-manrope: 'Manrope', system-ui, sans-serif;
   }
 
@@ -24,7 +25,7 @@
   }
 
   body {
-    @apply bg-gradient-to-br from-milk-50 via-white to-milk-100 text-gray-900 font-sans antialiased;
+    @apply bg-gradient-to-br from-gray-950 via-black to-gray-900 text-white font-sans antialiased;
     background-attachment: fixed;
     /* Предотвращение bounce effect на iOS */
     overscroll-behavior-y: none;
@@ -45,19 +46,19 @@
 }
 
 @layer components {
-  /* Premium Glass Effect */
+  /* Premium Glass Effect - Dark */
   .glass {
-    @apply bg-white/60 backdrop-blur-2xl border border-white/40 shadow-xl;
+    @apply bg-black/40 backdrop-blur-2xl border border-white/10 shadow-xl;
   }
 
-  /* Heavy Glassmorphism Card */
+  /* Heavy Glassmorphism Card - Dark */
   .glass-card {
-    @apply relative bg-white/40 backdrop-blur-xl border border-white/50 rounded-3xl;
+    @apply relative bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl;
     box-shadow:
-      0 8px 32px rgba(122, 15, 28, 0.08),
-      0 2px 8px rgba(255, 255, 255, 0.6) inset,
-      0 -2px 8px rgba(0, 0, 0, 0.02) inset;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      0 8px 32px rgba(0, 0, 0, 0.4),
+      0 2px 8px rgba(255, 255, 255, 0.05) inset,
+      0 -2px 8px rgba(0, 0, 0, 0.1) inset;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .glass-card::before {
@@ -65,26 +66,26 @@
     @apply absolute inset-0 rounded-3xl;
     background: linear-gradient(
       135deg,
-      rgba(255, 255, 255, 0.4) 0%,
-      rgba(255, 255, 255, 0.1) 50%,
+      rgba(255, 255, 255, 0.1) 0%,
+      rgba(255, 255, 255, 0.02) 50%,
       rgba(255, 255, 255, 0) 100%
     );
     pointer-events: none;
   }
 
   .glass-card:hover {
-    @apply bg-white/50 border-white/60;
+    @apply bg-white/10 border-white/20;
     box-shadow:
-      0 16px 48px rgba(122, 15, 28, 0.12),
-      0 4px 16px rgba(255, 255, 255, 0.8) inset,
-      0 -4px 16px rgba(0, 0, 0, 0.03) inset;
-    transform: translateY(-4px);
+      0 16px 48px rgba(122, 15, 28, 0.2),
+      0 4px 16px rgba(255, 255, 255, 0.1) inset,
+      0 -4px 16px rgba(0, 0, 0, 0.2) inset;
+    transform: translateY(-2px);
   }
 
-  /* Glass Header */
+  /* Glass Header - Dark */
   .glass-header {
-    @apply bg-white/70 backdrop-blur-2xl border-b border-white/50;
-    box-shadow: 0 4px 24px rgba(122, 15, 28, 0.04);
+    @apply bg-black/60 backdrop-blur-2xl border-b border-white/10;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.5);
   }
 
   /* Neon Glow Button */

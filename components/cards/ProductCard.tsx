@@ -5,19 +5,12 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { Product } from '@/lib/types'
 import { formatPrice } from '@/lib/utils'
-import { useTilt } from '@/hooks/useTilt'
 
 interface ProductCardProps {
   product: Product
 }
 
 export function ProductCard({ product }: ProductCardProps) {
-  const { ref, style, isHovered } = useTilt({
-    max: 10,
-    scale: 1.04,
-    speed: 350
-  })
-
   const trackClick = () => {
     console.log('product_click', { slug: product.slug })
   }
@@ -28,18 +21,14 @@ export function ProductCard({ product }: ProductCardProps) {
       onClick={trackClick}
       className="block group touch-manipulation"
     >
-      <div
-        ref={ref}
-        style={style}
-        className="glass-card h-full overflow-hidden relative"
-      >
+      <div className="glass-card h-full overflow-hidden relative">
         {/* Image */}
-        <div className="aspect-square relative overflow-hidden bg-gray-50">
+        <div className="aspect-square relative overflow-hidden bg-gray-900">
           <Image
             src={product.images[0]}
             alt={product.name}
             fill
-            className={`object-cover transition-transform duration-700 ${isHovered ? 'scale-110' : 'scale-100'}`}
+            className="object-cover transition-transform duration-700 group-hover:scale-110"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 group-active:opacity-100 transition-opacity duration-300" />
 
@@ -49,13 +38,6 @@ export function ProductCard({ product }: ProductCardProps) {
               New
             </div>
           )}
-
-          {/* Quick View */}
-          <div className="absolute bottom-3 sm:bottom-4 left-3 sm:left-4 right-3 sm:right-4 opacity-0 group-hover:opacity-100 group-active:opacity-100 transition-all duration-300">
-            <div className="bg-white/90 backdrop-blur-sm text-gray-900 text-center py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-medium">
-              Быстрый просмотр
-            </div>
-          </div>
         </div>
 
         {/* Content */}
@@ -64,7 +46,7 @@ export function ProductCard({ product }: ProductCardProps) {
             {product.category}
           </p>
 
-          <h3 className="font-display font-semibold text-base sm:text-lg mb-2 sm:mb-3 group-hover:text-brand-red group-active:text-brand-red transition-colors duration-300 line-clamp-1">
+          <h3 className="font-display font-semibold text-base sm:text-lg mb-2 sm:mb-3 text-white line-clamp-1">
             {product.name}
           </h3>
 

@@ -80,7 +80,7 @@ export function LoadingScreen() {
                     textShadow: '0 0 80px rgba(255,255,255,0.3)',
                   }}
                 >
-                  PROMO
+                  207
                 </motion.h1>
 
                 {/* Decorative underline */}

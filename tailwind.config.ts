@@ -29,6 +29,7 @@ const config: Config = {
       fontFamily: {
         sans: ['var(--font-manrope)', 'system-ui', 'sans-serif'],
         display: ['var(--font-space)', 'Manrope', 'system-ui', 'sans-serif'],
+        y2k: ['var(--font-russo)', 'system-ui', 'sans-serif'],
       },
       fontSize: {
         'display': ['6rem', { lineHeight: '0.9', letterSpacing: '-0.03em' }],
