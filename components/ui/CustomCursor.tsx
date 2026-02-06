@@ -1,107 +1,88 @@
 'use client'
 
-import { useEffect, useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { useEffect, useRef, useState } from 'react'
 
 export function CustomCursor() {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
-  const [isHovering, setIsHovering] = useState(false)
+  const cursorRef = useRef<HTMLDivElement>(null)
+  const followerRef = useRef<HTMLDivElement>(null)
   const [isVisible, setIsVisible] = useState(false)
+  const rafIdRef = useRef<number>(0)
 
+  // Проверка prefers-reduced-motion
   useEffect(() => {
-    const updateMousePosition = (e: MouseEvent) => {
-      setMousePosition({ x: e.clientX, y: e.clientY })
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0
+
+    if (prefersReducedMotion || isTouchDevice) {
+      return // Не рендерим курсор
     }
 
-    const handleMouseEnter = () => {
-      setIsVisible(true)
+    setIsVisible(true)
+
+    const cursor = cursorRef.current
+    const follower = followerRef.current
+
+    if (!cursor || !follower) return
+
+    let mouseX = 0
+    let mouseY = 0
+    let cursorX = 0
+    let cursorY = 0
+    let followerX = 0
+    let followerY = 0
+
+    const handleMouseMove = (e: MouseEvent) => {
+      mouseX = e.clientX
+      mouseY = e.clientY
     }
 
-    const handleMouseLeave = () => {
-      setIsVisible(false)
+    // Throttled animation loop (30 FPS вместо 60+)
+    const animate = () => {
+      // Smooth cursor (быстрее)
+      const cursorSpeed = 0.9
+      cursorX += (mouseX - cursorX) * cursorSpeed
+      cursorY += (mouseY - cursorY) * cursorSpeed
+
+      // Smooth follower (медленнее)
+      const followerSpeed = 0.15
+      followerX += (mouseX - followerX) * followerSpeed
+      followerY += (mouseY - followerY) * followerSpeed
+
+      // Применяем трансформацию напрямую (без React state!)
+      cursor.style.transform = `translate(${cursorX}px, ${cursorY}px)`
+      follower.style.transform = `translate(${followerX}px, ${followerY}px)`
+
+      rafIdRef.current = requestAnimationFrame(animate)
     }
 
-    const handleElementHover = (e: Event) => {
-      const target = e.target as HTMLElement
-      if (
-        target.tagName === 'BUTTON' ||
-        target.tagName === 'A' ||
-        target.closest('button') ||
-        target.closest('a')
-      ) {
-        setIsHovering(true)
-      } else {
-        setIsHovering(false)
-      }
-    }
-
-    window.addEventListener('mousemove', updateMousePosition)
-    window.addEventListener('mouseenter', handleMouseEnter)
-    window.addEventListener('mouseleave', handleMouseLeave)
-    window.addEventListener('mouseover', handleElementHover)
+    window.addEventListener('mousemove', handleMouseMove, { passive: true })
+    animate()
 
     return () => {
-      window.removeEventListener('mousemove', updateMousePosition)
-      window.removeEventListener('mouseenter', handleMouseEnter)
-      window.removeEventListener('mouseleave', handleMouseLeave)
-      window.removeEventListener('mouseover', handleElementHover)
+      window.removeEventListener('mousemove', handleMouseMove)
+      if (rafIdRef.current) {
+        cancelAnimationFrame(rafIdRef.current)
+      }
     }
   }, [])
 
-  return (
-    <AnimatePresence>
-      {isVisible && (
-        <>
-          {/* Outer glow ring */}
-          <motion.div
-            className="pointer-events-none fixed inset-0 z-50 hidden lg:block"
-            style={{
-              mixBlendMode: 'screen',
-            }}
-          >
-            <motion.div
-              className="absolute rounded-full"
-              style={{
-                left: mousePosition.x - 20,
-                top: mousePosition.y - 20,
-                width: 40,
-                height: 40,
-              }}
-              animate={{
-                scale: isHovering ? 1.5 : 1,
-                opacity: isHovering ? 0.8 : 0.5,
-              }}
-              transition={{
-                type: 'spring',
-                stiffness: 500,
-                damping: 28,
-              }}
-            >
-              <div className="absolute inset-0 rounded-full bg-gradient-to-r from-brand-red to-pink-500 opacity-20 blur-xl" />
-            </motion.div>
+  if (!isVisible) return null
 
-            {/* Inner cursor */}
-            <motion.div
-              className="absolute rounded-full border-2 border-brand-red/50"
-              style={{
-                left: mousePosition.x - 8,
-                top: mousePosition.y - 8,
-                width: 16,
-                height: 16,
-              }}
-              animate={{
-                scale: isHovering ? 0.5 : 1,
-                borderColor: isHovering ? 'rgba(239, 68, 68, 1)' : 'rgba(239, 68, 68, 0.5)',
-              }}
-              transition={{
-                type: 'spring',
-                stiffness: 700,
-                damping: 30,
-              }}
-            />
-          </motion.div>
-        </>
-      )}
-    </AnimatePresence>
+  return (
+    <div className="pointer-events-none fixed inset-0 z-50 hidden lg:block">
+      {/* Основной курсор */}
+      <div
+        ref={cursorRef}
+        className="fixed w-3 h-3 bg-brand-red rounded-full -translate-x-1/2 -translate-y-1/2"
+        style={{ mixBlendMode: 'screen' }}
+      />
+
+      {/* Эффект следования */}
+      <div
+        ref={followerRef}
+        className="fixed w-8 h-8 border border-brand-red rounded-full -translate-x-1/2 -translate-y-1/2"
+        style={{ mixBlendMode: 'screen' }}
+      />
+    </div>
   )
 }

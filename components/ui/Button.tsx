@@ -48,27 +48,17 @@ const Button = React.forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonPro
       </span>
     )
 
+    // Авто-добавляем security для внешних ссылок
+    const isExternal = href?.startsWith('http')
+    const secureTarget = target || (isExternal ? '_blank' : undefined)
+    const secureRel = rel || (isExternal && secureTarget === '_blank' ? 'noopener noreferrer' : undefined)
+
     if (href) {
-      if (magnetic) {
-        return (
-          <MagneticButton onClick={onClick} className="inline-flex">
-            <a
-              href={href}
-              target={target}
-              rel={rel}
-              ref={ref as any}
-              className="inline-flex"
-            >
-              {buttonContent}
-            </a>
-          </MagneticButton>
-        )
-      }
-      return (
+      const link = (
         <a
           href={href}
-          target={target}
-          rel={rel}
+          target={secureTarget}
+          rel={secureRel}
           ref={ref as any}
           onClick={onClick}
           className={cn(buttonVariants({ variant, size, className }))}
@@ -76,20 +66,35 @@ const Button = React.forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonPro
           {children}
         </a>
       )
+
+      if (magnetic) {
+        return <MagneticButton className="inline-flex">{link}</MagneticButton>
+      }
+      return link
     }
+
+    const buttonElement = (
+      <button
+        className={cn(buttonVariants({ variant, size, className }))}
+        ref={ref as any}
+        onClick={onClick}
+      >
+        {children}
+      </button>
+    )
 
     if (ripple) {
       if (magnetic) {
         return (
-          <MagneticButton onClick={onClick} className="inline-flex">
-            <RippleButton onClick={onClick} className={cn(buttonVariants({ variant, size, className }))}>
+          <MagneticButton className="inline-flex">
+            <RippleButton className={cn(buttonVariants({ variant, size, className }))}>
               {children}
             </RippleButton>
           </MagneticButton>
         )
       }
       return (
-        <RippleButton onClick={onClick} className={cn(buttonVariants({ variant, size, className }))}>
+        <RippleButton className={cn(buttonVariants({ variant, size, className }))}>
           {children}
         </RippleButton>
       )
@@ -97,13 +102,8 @@ const Button = React.forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonPro
 
     if (magnetic) {
       return (
-        <MagneticButton onClick={onClick} className="inline-flex">
-          <button
-            className={cn(buttonVariants({ variant, size, className }))}
-            ref={ref as any}
-          >
-            {children}
-          </button>
+        <MagneticButton className="inline-flex">
+          {buttonElement}
         </MagneticButton>
       )
     }

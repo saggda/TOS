@@ -7,6 +7,7 @@ import { getPostBySlug } from '@/lib/content'
 import { formatDate } from '@/lib/utils'
 import { Container } from '@/components/ui/Container'
 import { Post } from '@/lib/types'
+import { validateSlug } from '@/lib/validation'
 
 export default function PostPage() {
   const params = useParams()
@@ -15,17 +16,28 @@ export default function PostPage() {
 
   useEffect(() => {
     if (params.slug) {
-      getPostBySlug(params.slug as string).then((data) => {
-        setPost(data ?? null)
-        setLoading(false)
-      })
+      try {
+        const validatedSlug = validateSlug(params.slug as string)
+        getPostBySlug(validatedSlug).then((data) => {
+          setPost(data ?? null)
+          setLoading(false)
+          if (!data) {
+            notFound()
+          }
+        }).catch(() => {
+          notFound()
+        })
+      } catch (error) {
+        console.error('Invalid slug:', error)
+        notFound()
+      }
     }
   }, [params.slug])
 
   if (loading) {
     return (
       <Container className="py-12">
-        <p className="text-center text-gray-500">Загрузка...</p>
+        <p className="text-center text-white/70">Загрузка...</p>
       </Container>
     )
   }
@@ -47,7 +59,7 @@ export default function PostPage() {
         {/* Back button */}
         <a
           href="/media"
-          className="inline-block mb-6 text-gray-600 hover:text-brand-red transition-colors"
+          className="inline-block mb-6 text-white/70 hover:text-brand-red transition-colors"
         >
           ← Назад к медиа
         </a>
@@ -68,15 +80,15 @@ export default function PostPage() {
             <span className={`${typeColors[post.type]} text-white text-xs px-3 py-1 rounded-full capitalize`}>
               {post.type}
             </span>
-            <span className="text-gray-500 text-sm">{formatDate(post.date)}</span>
+            <span className="text-white/70 text-sm drop-shadow-sm">{formatDate(post.date)}</span>
           </div>
 
           {/* Title */}
-          <h1 className="text-4xl md:text-5xl font-bold mb-6">{post.title}</h1>
+          <h1 className="text-4xl md:text-5xl font-bold mb-6 text-white drop-shadow-lg">{post.title}</h1>
 
           {/* Content */}
           <div className="prose prose-lg max-w-none">
-            <p className="text-gray-700 leading-relaxed whitespace-pre-line">
+            <p className="text-white/90 leading-relaxed whitespace-pre-line drop-shadow-md">
               {post.content}
             </p>
           </div>

@@ -9,6 +9,7 @@ interface SmoothScrollProps {
     lerp?: number;
     duration?: number;
     orientation?: 'vertical' | 'horizontal';
+    wheelMultiplier?: number;
   };
 }
 
@@ -32,8 +33,9 @@ export function SmoothScroll({
       duration: options.duration || 1.5,
       orientation: options.orientation || 'vertical',
       gestureOrientation: 'vertical',
-      wheelMultiplier: 1,
-      touchMultiplier: 2,
+      wheelMultiplier: options.wheelMultiplier || 1,
+      touchMultiplier: 1.5, // Slightly responsive touch
+      smoothWheel: true,
       infinite: false,
     });
 

@@ -1,7 +1,5 @@
 import { Metadata } from 'next'
 import { Container } from '@/components/ui/Container'
-import { Header } from '@/components/layout/Header'
-import { Footer } from '@/components/layout/Footer'
 
 export const metadata: Metadata = {
   title: 'Условия использования | PROMO Team',
@@ -15,7 +13,6 @@ export const metadata: Metadata = {
 export default function TermsPage() {
   return (
     <>
-      <Header />
       <main className="min-h-screen py-20">
         <Container>
           <div className="max-w-4xl mx-auto">
@@ -30,6 +27,12 @@ export default function TermsPage() {
                   1.1. Доступ к веб-сайту promo-team.ru и его использование регулируются
                   настоящими Условиями использования.
                 </p>
+                {/* ... rest of the content ... */}
+                {/* To avoid deleting the whole file content in my mind, I will use replace_content more targetedly or re-write the wrapper.
+                   Wait, I should probably just target the surrounding tags if possible, or the specific lines.
+                   The file is small enough (200 lines). I will just remove the imports and proper lines.
+                */}
+
                 <p className="text-gray-700 leading-relaxed mb-4">
                   1.2. Используя Сайт, вы подтверждаете, что прочитали, поняли и согласны
                   соблюдать настоящие Условия. Если вы не согласны с этими условиями,
@@ -222,7 +225,6 @@ export default function TermsPage() {
           </div>
         </Container>
       </main>
-      <Footer />
     </>
   )
 }

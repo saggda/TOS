@@ -19,13 +19,13 @@ export async function Testimonials() {
         <Reveal variant="slide-up">
           {/* Section Header */}
           <div className="text-center max-w-3xl mx-auto mb-12 md:mb-16">
-            <p className="text-brand-red font-medium mb-3 uppercase tracking-wider text-sm md:text-base">
+            <p className="text-brand-red font-medium mb-3 uppercase tracking-wider text-sm md:text-base drop-shadow-md">
               Отзывы
             </p>
-            <h2 className="font-display text-3xl sm:text-4xl md:text-title font-bold mb-4 md:mb-6">
+            <h2 className="font-display text-3xl sm:text-4xl md:text-title font-bold mb-4 md:mb-6 text-white drop-shadow-lg">
               Что говорят о нас
             </h2>
-            <p className="text-gray-600 text-base sm:text-lg md:text-xl">
+            <p className="text-white/80 text-base sm:text-lg md:text-xl drop-shadow-md">
               Мнения наших гостей и посетителей о событиях и мерче
             </p>
           </div>

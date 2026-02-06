@@ -1,224 +1,114 @@
-'use client'
+'use client';
 
-import React, { useState } from 'react'
-import Link from 'next/link'
-import { Container } from '@/components/ui/Container'
-import { useToast } from '@/hooks/useToast'
-
-const navigationLinks = [
-  { href: '/afisha', label: 'Афиша' },
-  { href: '/shop', label: 'Магазин' },
-  { href: '/media', label: 'Медиа' },
-  { href: '/about', label: 'О нас' },
-]
-
-const quickLinks = [
-  { href: '/privacy', label: 'Политика конфиденциальности' },
-  { href: '/terms', label: 'Условия использования' },
-  { href: '/faq', label: 'FAQ' },
-  { href: '/support', label: 'Поддержка' },
-]
-
-const socialLinks = [
-  { name: 'Telegram', href: 'https://t.me/', icon: '📱' },
-  { name: 'Instagram', href: 'https://instagram.com/', icon: '📸' },
-  { name: 'VK', href: 'https://vk.com/', icon: '💬' },
-]
-
-const contactInfo = {
-  email: 'info@promo-team.ru',
-  phone: '+7 (999) 123-45-67',
-  address: 'Москва, Россия',
-}
+import React, { useEffect, useRef } from 'react';
+import Link from 'next/link';
+import { Container } from '@/components/ui/Container';
+import { BilingualText } from '@/components/ui/BilingualText';
 
 export function Footer() {
-  const currentYear = new Date().getFullYear()
-  const [emailInput, setEmailInput] = useState('')
-  const toast = useToast()
+  const canvasRef = useRef<HTMLCanvasElement>(null);
 
-  const trackSocialClick = (platform: string) => {
-    console.log('social_click', { platform })
-  }
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
 
-  const handleNewsletterSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    console.log('newsletter_signup', { email: emailInput })
+    let width = canvas.width = canvas.parentElement?.clientWidth || window.innerWidth;
+    let height = canvas.height = 150;
 
-    toast.success('Спасибо за подписку на рассылку!', 4000)
+    const resize = () => {
+      width = canvas.width = canvas.parentElement?.clientWidth || window.innerWidth;
+      height = canvas.height = 150;
+    };
+    window.addEventListener('resize', resize);
 
-    setEmailInput('')
-  }
+    // Visualizer Bars
+    const barWidth = 20;
+    const gap = 4;
+    const barCount = Math.ceil(width / (barWidth + gap));
+    const bars: number[] = new Array(barCount).fill(0);
+
+    const animate = () => {
+      ctx.clearRect(0, 0, width, height);
+
+      // Simulating audio data
+      for (let i = 0; i < barCount; i++) {
+        const targetHeight = Math.random() * height * 0.6;
+        bars[i] += (targetHeight - bars[i]) * 0.1;
+
+        ctx.fillStyle = `rgba(220, 20, 60, ${0.3 + (bars[i] / height)})`; // Blood Red Transparency
+
+        // Draw "Liquid" Bar (rounded top, slightly fluid)
+        const x = i * (barWidth + gap);
+        const h = bars[i];
+        const y = height - h;
+
+        ctx.beginPath();
+        ctx.moveTo(x, height);
+        ctx.lineTo(x, y + 10);
+        ctx.quadraticCurveTo(x + barWidth / 2, y - 5, x + barWidth, y + 10);
+        ctx.lineTo(x + barWidth, height);
+        ctx.fill();
+
+        // Glow
+        ctx.shadowColor = '#DC143C';
+        ctx.shadowBlur = 15;
+      }
+
+      requestAnimationFrame(animate);
+    };
+
+    const rafInfo = { id: requestAnimationFrame(animate) };
+
+    return () => {
+      window.removeEventListener('resize', resize);
+      cancelAnimationFrame(rafInfo.id);
+    };
+  }, []);
 
   return (
-    <footer className="relative mt-20 overflow-hidden">
-      {/* Background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-br from-brand-red/5 via-brand-dark/5 to-purple-900/5" />
-
-      {/* Glass effect overlay */}
-      <div className="absolute inset-0 bg-white/70 backdrop-blur-2xl border-t border-white/50" />
-
-      {/* Content */}
-      <div className="relative">
-        <Container>
-          <div className="py-12 sm:py-16">
-            {/* Main Footer Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12 mb-12">
-              {/* Brand Section */}
-              <div className="lg:col-span-1">
-                <Link href="/" className="inline-block mb-4">
-                  <h3 className="text-2xl sm:text-3xl font-bold text-gradient">PROMO</h3>
-                </Link>
-                <p className="text-gray-600 text-sm leading-relaxed mb-6">
-                  Event promo team. Creating unforgettable experiences since 2024.
-                </p>
-
-                {/* Social Links - Circle Buttons */}
-                <div className="flex items-center space-x-3">
-                  {socialLinks.map((social) => (
-                    <a
-                      key={social.name}
-                      href={social.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      onClick={() => trackSocialClick(social.name)}
-                      className="w-11 h-11 flex items-center justify-center rounded-full bg-white/60 hover:bg-brand-red hover:text-white backdrop-blur-sm border border-white/50 text-xl hover:scale-110 transition-all duration-300 shadow-lg hover:shadow-xl"
-                      title={social.name}
-                      aria-label={social.name}
-                    >
-                      {social.icon}
-                    </a>
-                  ))}
-                </div>
-              </div>
-
-              {/* Navigation Links */}
-              <div>
-                <h4 className="font-semibold text-gray-900 mb-4 text-sm uppercase tracking-wider">
-                  Навигация
-                </h4>
-                <ul className="space-y-3">
-                  {navigationLinks.map((link) => (
-                    <li key={link.href}>
-                      <Link
-                        href={link.href}
-                        className="text-gray-600 hover:text-brand-red transition-colors duration-300 text-sm flex items-center group"
-                      >
-                        <span className="w-1.5 h-1.5 rounded-full bg-brand-red/0 group-hover:bg-brand-red mr-2 transition-all duration-300" />
-                        {link.label}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              {/* Quick Links */}
-              <div>
-                <h4 className="font-semibold text-gray-900 mb-4 text-sm uppercase tracking-wider">
-                  Информация
-                </h4>
-                <ul className="space-y-3">
-                  {quickLinks.map((link) => (
-                    <li key={link.href}>
-                      <Link
-                        href={link.href}
-                        className="text-gray-600 hover:text-brand-red transition-colors duration-300 text-sm flex items-center group"
-                      >
-                        <span className="w-1.5 h-1.5 rounded-full bg-brand-red/0 group-hover:bg-brand-red mr-2 transition-all duration-300" />
-                        {link.label}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              {/* Newsletter & Contact */}
-              <div>
-                <h4 className="font-semibold text-gray-900 mb-4 text-sm uppercase tracking-wider">
-                  Рассылка
-                </h4>
-                <form onSubmit={handleNewsletterSubmit} className="mb-6">
-                  <div className="flex flex-col sm:flex-row gap-2">
-                    <input
-                      type="email"
-                      value={emailInput}
-                      onChange={(e) => setEmailInput(e.target.value)}
-                      placeholder="Ваш email"
-                      className="flex-1 px-4 py-2.5 rounded-full bg-white/60 backdrop-blur-sm border border-white/50 text-sm focus:outline-none focus:ring-2 focus:ring-brand-red/20 focus:border-brand-red transition-all duration-300"
-                      required
-                    />
-                    <button
-                      type="submit"
-                      className="px-6 py-2.5 bg-brand-red hover:bg-brand-dark text-white rounded-full text-sm font-medium transition-all duration-300 hover:shadow-lg hover:scale-105 active:scale-95"
-                    >
-                      Подписаться
-                    </button>
-                  </div>
-                </form>
-
-                {/* Contact Info */}
-                <div className="space-y-3 text-sm">
-                  <a
-                    href={`mailto:${contactInfo.email}`}
-                    className="flex items-center text-gray-600 hover:text-brand-red transition-colors duration-300 group"
-                  >
-                    <span className="w-8 h-8 flex items-center justify-center rounded-full bg-white/60 group-hover:bg-brand-red group-hover:text-white mr-3 transition-all duration-300">
-                      ✉
-                    </span>
-                    {contactInfo.email}
-                  </a>
-                  <a
-                    href={`tel:${contactInfo.phone}`}
-                    className="flex items-center text-gray-600 hover:text-brand-red transition-colors duration-300 group"
-                  >
-                    <span className="w-8 h-8 flex items-center justify-center rounded-full bg-white/60 group-hover:bg-brand-red group-hover:text-white mr-3 transition-all duration-300">
-                      📞
-                    </span>
-                    {contactInfo.phone}
-                  </a>
-                  <div className="flex items-center text-gray-600">
-                    <span className="w-8 h-8 flex items-center justify-center rounded-full bg-white/60 mr-3">
-                      📍
-                    </span>
-                    {contactInfo.address}
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Bottom Bar */}
-            <div className="border-t border-gray-200/50 pt-8">
-              <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-gray-500">
-                {/* Copyright */}
-                <p className="text-center md:text-left">
-                  © {currentYear} PROMO Team. Все права защищены.
-                </p>
-
-                {/* Bottom Links */}
-                <div className="flex items-center space-x-6">
-                  <Link
-                    href="/privacy"
-                    className="hover:text-brand-red transition-colors duration-300"
-                  >
-                    Конфиденциальность
-                  </Link>
-                  <Link
-                    href="/terms"
-                    className="hover:text-brand-red transition-colors duration-300"
-                  >
-                    Условия
-                  </Link>
-                  <Link
-                    href="/cookies"
-                    className="hover:text-brand-red transition-colors duration-300"
-                  >
-                    Cookies
-                  </Link>
-                </div>
-              </div>
-            </div>
-          </div>
-        </Container>
+    <footer className="relative mt-20 border-t border-brand-blood/20 bg-black overflow-hidden">
+      {/* Visualizer Background */}
+      <div className="absolute bottom-0 left-0 w-full h-[150px] opacity-50 pointer-events-none">
+        <canvas ref={canvasRef} className="w-full h-full" />
       </div>
+
+      <Container className="relative z-10 py-12">
+        <div className="flex flex-col md:flex-row justify-between items-center gap-8">
+          {/* Logo area */}
+          <div className="flex flex-col items-center md:items-start">
+            <h2 className="font-hype text-4xl text-brand-crimson">217</h2>
+            <p className="text-xs text-brand-dark/0 select-none">PROMO</p> {/* Hidden promo text as requested */}
+          </div>
+
+          {/* Navigation */}
+          <div className="flex gap-8 text-sm font-bold tracking-widest">
+            <Link href="/afisha" className="hover:text-brand-crimson transition-colors">
+              <BilingualText en="EVENTS" ru="АФИША" />
+            </Link>
+            <Link href="/shop" className="hover:text-brand-crimson transition-colors">
+              <BilingualText en="SHOP" ru="МАГАЗИН" />
+            </Link>
+            <Link href="/media" className="hover:text-brand-crimson transition-colors">
+              <BilingualText en="MEDIA" ru="МЕДИА" />
+            </Link>
+          </div>
+
+          {/* Legal */}
+          <div className="flex flex-col items-center md:items-end gap-2 text-[10px] text-gray-500 font-mono uppercase">
+            <div className="flex gap-4">
+              <Link href="/terms" className="hover:text-brand-crimson transition-colors">
+                Terms
+              </Link>
+              <Link href="/privacy" className="hover:text-brand-crimson transition-colors">
+                Privacy
+              </Link>
+            </div>
+            <p>© 2024 TOS. ALL RIGHTS RESERVED.</p>
+          </div>
+        </div>
+      </Container>
     </footer>
-  )
+  );
 }

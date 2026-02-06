@@ -8,25 +8,35 @@ export function LoadingScreen() {
   const [progress, setProgress] = useState(0)
 
   useEffect(() => {
-    // Simulate loading progress
+    // Загружаем когда контент готов
+    const checkReady = () => {
+      if (document.readyState === 'complete') {
+        setIsLoading(false)
+      }
+    }
+
+    window.addEventListener('load', checkReady)
+
+    // Fallback: максимум 1 секунда
+    const fallback = setTimeout(() => {
+      setIsLoading(false)
+    }, 1000)
+
+    // Симулируем прогресс для UX
     const progressInterval = setInterval(() => {
       setProgress((prev) => {
         if (prev >= 100) {
           clearInterval(progressInterval)
           return 100
         }
-        return prev + Math.random() * 15
+        return prev + Math.random() * 20 // Быстрее
       })
-    }, 200)
-
-    // Hide loading screen after progress completes
-    const timer = setTimeout(() => {
-      setIsLoading(false)
-    }, 2500)
+    }, 100)
 
     return () => {
+      window.removeEventListener('load', checkReady)
+      clearTimeout(fallback)
       clearInterval(progressInterval)
-      clearTimeout(timer)
     }
   }, [])
 
@@ -80,7 +90,7 @@ export function LoadingScreen() {
                     textShadow: '0 0 80px rgba(255,255,255,0.3)',
                   }}
                 >
-                  207
+                  twooneseven
                 </motion.h1>
 
                 {/* Decorative underline */}

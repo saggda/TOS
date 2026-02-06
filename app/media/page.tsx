@@ -33,19 +33,18 @@ export default function MediaPage() {
 
   return (
     <Container className="py-12">
-      <h1 className="text-4xl md:text-5xl font-bold mb-8">Медиа</h1>
+      <h1 className="text-4xl md:text-5xl font-bold mb-8 text-white drop-shadow-lg">Медиа</h1>
 
       {/* Types Filter */}
-      <div className="flex flex-wrap gap-3 mb-8">
+      <div className="flex flex-wrap gap-2 sm:gap-4 mb-8 sm:mb-12">
         {postTypes.map((type) => (
           <button
             key={type.value}
             onClick={() => setSelectedType(type.value)}
-            className={`px-6 py-2 rounded-full transition-all duration-300 ${
-              selectedType === type.value
-                ? 'bg-brand-red text-white'
-                : 'bg-white/50 hover:bg-white/80 backdrop-blur-sm border border-gray-200'
-            }`}
+            className={`px-5 sm:px-8 py-2.5 transition-all duration-300 text-xs font-bold uppercase tracking-widest border ${selectedType === type.value
+                ? 'bg-brand-crimson/10 border-brand-crimson text-white shadow-[0_0_20px_rgba(220,20,60,0.4)]'
+                : 'bg-black border-white/10 hover:border-white/30 text-white/60 hover:text-white'
+              }`}
           >
             {type.label}
           </button>
@@ -55,11 +54,11 @@ export default function MediaPage() {
       {/* Posts Grid */}
       {loading ? (
         <div className="text-center py-12">
-          <p className="text-gray-500">Загрузка...</p>
+          <p className="text-white/70">Загрузка...</p>
         </div>
       ) : filteredPosts.length === 0 ? (
         <div className="text-center py-12">
-          <p className="text-gray-500 text-lg">Материалов этого типа пока нет</p>
+          <p className="text-white/70 text-lg">Материалов этого типа пока нет</p>
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
-import { Space_Grotesk, Russo_One, Manrope } from 'next/font/google'
+import { Suspense } from 'react'
+import { Space_Grotesk, Russo_One, Manrope, Syne } from 'next/font/google'
 import './globals.css'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
@@ -11,7 +12,10 @@ import { CursorEffects } from '@/components/ui/CursorEffects'
 import { CookieConsent } from '@/components/layout/CookieConsent'
 import { ToastProvider } from '@/components/ui/ToastProvider'
 import { SmoothScroll } from '@/components/ui/SmoothScroll'
-import { siteConfig } from '@/lib/metadata'
+import { InteractiveEffects } from '@/components/ui/InteractiveEffects'
+import { CartProvider } from '@/contexts/CartContext'
+import { CartModal } from '@/components/ui/CartModal'
+import { siteConfig } from '@/lib/config'
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ['latin'],
@@ -27,15 +31,21 @@ const russoOne = Russo_One({
 })
 
 const manrope = Manrope({
-  subsets: ['latin'],
+  subsets: ['latin', 'cyrillic'],
   variable: '--font-manrope',
+  display: 'swap',
+})
+
+const syne = Syne({
+  subsets: ['latin'],
+  variable: '--font-syne',
   display: 'swap',
 })
 
 export const metadata: Metadata = {
   title: {
     default: siteConfig.title,
-    template: '%s | PROMO Team',
+    template: '%s | TOS',
   },
   description: siteConfig.description,
   keywords: [
@@ -110,14 +120,14 @@ export default function RootLayout({
       <head>
         <link rel="icon" href="/favicon.ico" />
         <link rel="manifest" href="/manifest.json" />
-        <meta name="theme-color" content="#7A0F1C" />
+        <meta name="theme-color" content="#8B0000" />
       </head>
-      <body className={`${spaceGrotesk.variable} ${russoOne.variable} ${manrope.variable}`}>
-        <SmoothScroll options={{ lerp: 0.15, duration: 1.5 }}>
-          <ToastProvider>
-            <CustomCursor />
-            <CursorEffects showTrail={false} showRipple={true} magneticElements="button, a, .card" />
-            <ProgressBar />
+      <body className={`${spaceGrotesk.variable} ${russoOne.variable} ${manrope.variable} ${syne.variable}`}>
+        <ToastProvider>
+          <CartProvider>
+            <Suspense fallback={null}>
+              <ProgressBar />
+            </Suspense>
             <LoadingScreen />
             <Header />
             <main className="min-h-screen">
@@ -125,8 +135,9 @@ export default function RootLayout({
             </main>
             <Footer />
             <CookieConsent />
-          </ToastProvider>
-        </SmoothScroll>
+            <CartModal />
+          </CartProvider>
+        </ToastProvider>
       </body>
     </html>
   )

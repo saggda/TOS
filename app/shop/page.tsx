@@ -33,19 +33,18 @@ export default function ShopPage() {
 
   return (
     <Container className="py-8 sm:py-12">
-      <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 sm:mb-8">Магазин</h1>
+      <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 sm:mb-8 text-white drop-shadow-lg">Магазин</h1>
 
       {/* Categories */}
-      <div className="flex flex-wrap gap-2 sm:gap-3 mb-6 sm:mb-8">
+      <div className="flex flex-wrap gap-2 sm:gap-4 mb-8 sm:mb-12">
         {categories.map((category) => (
           <button
             key={category.value}
             onClick={() => setSelectedCategory(category.value)}
-            className={`px-4 sm:px-6 py-2 rounded-full transition-all duration-300 text-sm touch-manipulation ${
-              selectedCategory === category.value
-                ? 'bg-brand-red text-white'
-                : 'bg-white/50 hover:bg-white/80 backdrop-blur-sm border border-gray-200'
-            }`}
+            className={`px-5 sm:px-8 py-2.5 transition-all duration-300 text-xs font-bold uppercase tracking-widest border ${selectedCategory === category.value
+                ? 'bg-brand-crimson/10 border-brand-crimson text-white shadow-[0_0_20px_rgba(220,20,60,0.4)]'
+                : 'bg-black border-white/10 hover:border-white/30 text-white/60 hover:text-white'
+              }`}
           >
             {category.label}
           </button>
@@ -55,11 +54,11 @@ export default function ShopPage() {
       {/* Products Grid */}
       {loading ? (
         <div className="text-center py-12">
-          <p className="text-gray-500">Загрузка...</p>
+          <p className="text-white/70">Загрузка...</p>
         </div>
       ) : filteredProducts.length === 0 ? (
         <div className="text-center py-12">
-          <p className="text-gray-500 text-base sm:text-lg">Товаров в этой категории пока нет</p>
+          <p className="text-white/70 text-base sm:text-lg">Товаров в этой категории пока нет</p>
         </div>
       ) : (
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-6">

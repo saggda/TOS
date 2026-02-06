@@ -28,28 +28,28 @@ const toastIcons = {
 
 const toastStyles = {
   success: {
-    container: 'border-green-500/30 bg-white/70',
-    icon: 'text-green-600',
-    iconBg: 'bg-green-100',
-    progress: 'bg-green-500',
+    container: 'border-brand-crimson/50 bg-[#0a0a0a] text-white shadow-[0_10px_40px_rgba(220,20,60,0.2)]',
+    icon: 'text-brand-crimson',
+    iconBg: 'bg-brand-crimson/10',
+    progress: 'bg-brand-crimson',
   },
   error: {
-    container: 'border-red-500/30 bg-white/70',
-    icon: 'text-red-600',
-    iconBg: 'bg-red-100',
-    progress: 'bg-red-500',
+    container: 'border-red-600 bg-[#0a0a0a] text-white shadow-[0_10px_40px_rgba(255,0,0,0.2)]',
+    icon: 'text-red-500',
+    iconBg: 'bg-red-500/10',
+    progress: 'bg-red-600',
   },
   warning: {
-    container: 'border-orange-500/30 bg-white/70',
-    icon: 'text-orange-600',
-    iconBg: 'bg-orange-100',
+    container: 'border-orange-500/50 bg-[#0a0a0a] text-white shadow-[0_10px_40px_rgba(255,165,0,0.1)]',
+    icon: 'text-orange-500',
+    iconBg: 'bg-orange-500/10',
     progress: 'bg-orange-500',
   },
   info: {
-    container: 'border-brand-red/30 bg-white/70',
-    icon: 'text-brand-red',
-    iconBg: 'bg-brand-red/10',
-    progress: 'bg-brand-red',
+    container: 'border-white/20 bg-[#0a0a0a] text-white shadow-[0_10px_40px_rgba(255,255,255,0.05)]',
+    icon: 'text-white',
+    iconBg: 'bg-white/10',
+    progress: 'bg-white',
   },
 }
 
@@ -113,32 +113,26 @@ export function ToastComponent({ toast, onRemove }: ToastProps) {
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
       className={cn(
-        'relative flex items-start gap-3 rounded-2xl border p-4',
+        'relative flex items-start gap-4 p-5 border overflow-hidden',
         'min-w-[320px] max-w-md',
-        'backdrop-blur-xl',
-        'shadow-xl',
+        'backdrop-blur-2xl transition-all duration-300',
         styles.container
       )}
-      style={{
-        boxShadow: '0 8px 32px rgba(122, 15, 28, 0.12), 0 2px 8px rgba(255, 255, 255, 0.6) inset',
-      }}
     >
-      {/* Gradient overlay for glassmorphism */}
-      <div
-        className="absolute inset-0 rounded-2xl pointer-events-none"
-        style={{
-          background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0) 100%)',
-        }}
-      />
+      {/* Scanline Effect */}
+      <div className="absolute inset-0 bg-scanlines opacity-5 pointer-events-none" />
+
+      {/* Animated Glow Border */}
+      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-brand-crimson to-transparent opacity-50" />
 
       {/* Icon */}
-      <div className={cn('flex-shrink-0 rounded-xl p-2', styles.iconBg)}>
+      <div className={cn('flex-shrink-0 p-2.5 border border-white/10', styles.iconBg)}>
         <Icon className={cn('h-5 w-5', styles.icon)} />
       </div>
 
       {/* Content */}
-      <div className="flex-1 space-y-1 relative z-10">
-        <p className="text-sm font-medium text-gray-900 leading-relaxed">
+      <div className="flex-1 space-y-1 relative z-10 py-1">
+        <p className="text-sm font-bold uppercase tracking-widest text-white drop-shadow-sm font-mono leading-tight">
           {toast.message}
         </p>
       </div>
@@ -147,9 +141,8 @@ export function ToastComponent({ toast, onRemove }: ToastProps) {
       <button
         onClick={() => onRemove(toast.id)}
         className={cn(
-          'flex-shrink-0 rounded-lg p-1.5 transition-all duration-200',
-          'hover:bg-gray-100/80',
-          'text-gray-500 hover:text-gray-700',
+          'flex-shrink-0 p-1.5 transition-all duration-200 border border-transparent hover:border-white/10',
+          'text-white/30 hover:text-white',
           'relative z-10'
         )}
       >
@@ -159,7 +152,7 @@ export function ToastComponent({ toast, onRemove }: ToastProps) {
       {/* Progress Bar */}
       <motion.div
         className={cn(
-          'absolute bottom-0 left-0 right-0 h-1 rounded-b-2xl',
+          'absolute bottom-0 left-0 right-0 h-1',
           styles.progress
         )}
         initial={{ scaleX: 1 }}

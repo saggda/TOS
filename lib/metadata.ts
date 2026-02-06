@@ -1,17 +1,5 @@
 import { Metadata } from 'next'
-
-// Site configuration
-export const siteConfig = {
-  name: 'PROMO Team',
-  title: 'PROMO Team - Event Promo Team',
-  description: 'Event promo team creating unforgettable experiences. Electronic music events, exclusive merchandise, and media content.',
-  url: 'https://promoteam.ru', // Замените на реальный URL
-  ogImage: '/og-image.jpg', // Будет создано
-  links: {
-    telegram: 'https://t.me/',
-    instagram: 'https://instagram.com/',
-  },
-}
+import { siteConfig } from './config'
 
 // Base metadata types
 interface PageMetadata {

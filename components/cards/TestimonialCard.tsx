@@ -3,26 +3,18 @@
 import React from 'react'
 import Image from 'next/image'
 import { Testimonial } from '@/lib/types'
-import { useTilt } from '@/hooks/useTilt'
-import { formatDate } from '@/lib/utils'
 
 interface TestimonialCardProps {
   testimonial: Testimonial
 }
 
 export function TestimonialCard({ testimonial }: TestimonialCardProps) {
-  const { ref, style, isHovered } = useTilt({
-    max: 10,
-    scale: 1.02,
-    speed: 400
-  })
-
   // Generate star rating
   const renderStars = (rating: number) => {
     return Array.from({ length: 5 }, (_, i) => (
       <svg
         key={i}
-        className={`w-4 h-4 sm:w-5 sm:h-5 ${i < rating ? 'text-accent-orange' : 'text-gray-300'}`}
+        className={`w-4 h-4 sm:w-5 sm:h-5 ${i < rating ? 'text-accent-orange' : 'text-white/20'}`}
         fill="currentColor"
         viewBox="0 0 20 20"
       >
@@ -32,11 +24,7 @@ export function TestimonialCard({ testimonial }: TestimonialCardProps) {
   }
 
   return (
-    <div
-      ref={ref}
-      style={style}
-      className="glass-card h-full p-6 md:p-8 relative group touch-manipulation"
-    >
+    <div className="glass-card h-full p-6 md:p-8 relative group touch-manipulation">
       {/* Quote Icon */}
       <div className="absolute top-4 sm:top-6 right-4 sm:right-6 text-6xl sm:text-8xl font-serif text-brand-red/5 group-hover:text-brand-red/10 transition-colors duration-300">
         ❝
@@ -51,15 +39,15 @@ export function TestimonialCard({ testimonial }: TestimonialCardProps) {
 
         {/* Testimonial Text */}
         <blockquote className="flex-grow mb-5 sm:mb-6">
-          <p className="text-sm sm:text-base text-gray-700 leading-relaxed line-clamp-5 sm:line-clamp-none">
+          <p className="text-sm sm:text-base text-white/90 leading-relaxed line-clamp-5 sm:line-clamp-none drop-shadow-sm">
             {testimonial.text}
           </p>
         </blockquote>
 
         {/* Author Info */}
-        <div className="flex items-start gap-3 sm:gap-4 pt-4 sm:pt-5 border-t border-gray-200/50">
+        <div className="flex items-start gap-3 sm:gap-4 pt-4 sm:pt-5 border-t border-white/10">
           {/* Avatar */}
-          <div className="relative w-10 h-10 sm:w-12 sm:h-12 flex-shrink-0 rounded-full overflow-hidden ring-2 ring-white/50 group-hover:ring-brand-red/50 transition-all duration-300">
+          <div className="relative w-10 h-10 sm:w-12 sm:h-12 flex-shrink-0 rounded-full overflow-hidden ring-2 ring-white/30 group-hover:ring-brand-red/50 transition-all duration-300">
             <Image
               src={testimonial.avatar}
               alt={testimonial.name}
@@ -70,10 +58,10 @@ export function TestimonialCard({ testimonial }: TestimonialCardProps) {
 
           {/* Author Details */}
           <div className="flex-grow min-w-0">
-            <h4 className="font-display font-bold text-sm sm:text-base text-gray-900 truncate">
+            <h4 className="font-display font-bold text-sm sm:text-base text-white truncate drop-shadow-sm">
               {testimonial.name}
             </h4>
-            <p className="text-xs sm:text-sm text-gray-500 mb-1 sm:mb-1 truncate">
+            <p className="text-xs sm:text-sm text-white/70 mb-1 sm:mb-1 truncate">
               {testimonial.role}
             </p>
             {testimonial.event && (

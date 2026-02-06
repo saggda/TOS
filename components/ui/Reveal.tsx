@@ -49,9 +49,10 @@ export function Reveal({
     <div
       ref={ref}
       className={cn(
-        'transition-all ease-out',
+        'transition-all ease-out relative z-10',
         variantStyles[variant],
         isVisible && visibleStyles,
+        !isVisible && 'pointer-events-none',
         className
       )}
       style={transitionStyle}
